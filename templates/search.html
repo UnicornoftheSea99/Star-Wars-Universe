@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<script type="text/javascript" src="{{ url_for('static', filename = 'search.js') }}"></script>
+<script>
+    let results = {{results|tojson}};
+    let titleres = {{titleres|tojson}};
+    let catres = {{catres|tojson}};
+    let charres = {{charres|tojson}};
+    let droidres = {{droidres|tojson}};
+    let sumres = {{sumres|tojson}};
+    let query = {{query|tojson}};
+    console.log(results);
+    console.log(query);
+</script>   
+
+<div class ="headerhome">
+    <img src = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/4d2f3d93-e8b3-4e6d-bc04-80d1b99db218/d97g7bt-8fabadb3-b940-48b7-a612-00c4bec89ddd.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzRkMmYzZDkzLWU4YjMtNGU2ZC1iYzA0LTgwZDFiOTlkYjIxOFwvZDk3ZzdidC04ZmFiYWRiMy1iOTQwLTQ4YjctYTYxMi0wMGM0YmVjODlkZGQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.5JqQXbk26lcDbqIu83bUMXlMxbinnTZ9kat6kU5hjBY" class="fullwidth" alt = "star wars image header">
+    <br>
+    <div id = "search" class = "coolfont">
+        <span class = "title accent">Showing Results for "{{query}}"</span>
+        <span id = "numresults"></span>
+        <div id = "searchresults" class = "listitem"></div>
+    </div>
+</div>
+{% endblock %}

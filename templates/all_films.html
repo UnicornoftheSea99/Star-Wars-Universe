@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <script type="text/javascript" src="{{ url_for('static', filename = 'show_all.js') }}"></script>
+    
+    <script>
+        let all = {{all|tojson}}
+        console.log(all)
+    </script>
+
+    <div class = "container coolfont">
+    <div class = "row">
+        <span class = "title accent">all movies and series</span><br>
+    </div>
+        <div class = "row" id = "all"></div>
+    </div>
+{% endblock %}
+

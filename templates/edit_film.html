@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<script type="text/javascript" src="{{ url_for('static', filename = 'edit_film.js') }}"></script>
+<script>
+    let all_characters = {{all_characters|tojson}};
+    let all_droids = {{all_droids|tojson}};
+    let movie = {{movie|tojson}}
+    console.log(movie)
+</script>
+
+<div class = "container headerhome coolfont">
+    <img src = "https://img5.goodfon.com/wallpaper/nbig/4/19/carlos-sutter-by-carlos-sutter-kosmos-star-wars-imperiia-spa.jpg" class="headerimage" alt = "Star Wars header image">
+    <br>
+    <div id = "form_feedback" class = "form_feedback"></div>
+    <span class="title accent">Edit Entry:</span>
+    <div class = "col-10">
+        <div class = "row forminput nospace">
+            <label for="title" class = "darkgrey">title:</label>
+            <input type="text" class="form-control" id = "title" value = "{{movie.title}}" placeholder = "title" >
+        </div>
+        <div class = "row forminput">
+            <div class = "col nospace">
+                <label for="release_year" class = "darkgrey">release year:</label>
+                <input type="text" class="form-control" id = "release_year" value = "{{movie.release_year}}" placeholder = "release year">
+            </div>
+            <div class = "col nospace">
+                <label for="era" class = "darkgrey">canon year:</label>
+                <input type="text" class="form-control" id = "era" value = "{{movie.era}}" placeholder = "canon year (ex : 22 BBY)">
+            </div>
+        </div>
+        <div id = "radio_series" class = "row forminput nospace">
+            <label class="radio-inline choose"><input type="radio" name="series" value="original"> original</label> 
+            <label class="radio-inline choose"><input type="radio" name="series" value="prequel"> prequel</label>
+            <label class="radio-inline choose"><input type="radio" name="series" value="sequel"> sequel</label>  
+            <label class="radio-inline choose"><input type="radio" name="series" value="anthology"> anthology</label>    
+        </div>
+        <div class = "row forminput nospace">
+            <div class = "col nospace">
+                <div class="form-group">
+                    <label for="chars" class = "darkgrey">main characters:</label>
+                    <select class="form-control custom-select custom-select-lg" id="chars" multiple>
+                        {% for char in all_characters %}
+                            {% if char in movie.main_characters %}
+                                <option value = "{{char}}" selected="selected">{{char}}</option>
+                            {% else %}
+                                <option value = "{{char}}">{{char}}</option>
+                            {% endif %}
+                        {% endfor %}
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div id="other_option">
+                    <input type="text" id="other" class="form-control" placeholder="other character">
+                </div>
+            </div>
+            <div class = "col nospace">
+                <div class="form-group">
+                    <label for="droids" class = "darkgrey">droids:</label>
+                    <select class="form-control custom-select custom-select-lg" id="droids" multiple>
+                        {% for droid in all_droids %}
+                            {% if droid in movie.droids %}
+                                <option value = "{{droid}}" selected="selected">{{droid}}</option>
+                            {% else %}
+                                <option value = "{{droid}}">{{droid}}</option>
+                            {% endif %}
+                        {% endfor %}
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div id="other_option2">
+                    <input type="text" id="other2" class="form-control" placeholder="other droid">
+                </div>
+            </div>
+        </div>
+        <div class = "row forminput nospace">
+            <div class="form-group">
+                <label for="summary" class = "darkgrey">summary:</label>
+                <textarea id="summary" class="form-control textareatext" rows="4" cols = "200"  placeholder="put summary here">{{movie.summary}}</textarea>
+            </div>
+        </div>
+        <div class = "row forminput nospace">
+            <label for="image_url" class = "darkgrey">img url:</label>
+            <input type="text" class="form-control" id = "image_url" value = "{{movie.image}}" placeholder = "add image url here">
+        </div>
+        <div class = "row forminput nospace">
+            <div class = "col-2 nospace">
+                <label for="editbutton"></label>
+                <input type="submit" class="coolfont btn btn-outline-primary btn-lg btn-block" id = "editbutton" value="Submit">
+            </div>
+            <div class = "col-3 nospace">
+                <label for="discardbutton"></label>
+                <button id = "discardbutton" class="btn btn-outline-primary btn-lg btn-block">Discard Changes</button>
+            </div>
+            <div id="dialog">
+                <p>Your changes will be permanently discarded and cannot be recovered. Are you sure?</p>
+            </div>
+        </div>
+
+    </div>
+</div> 
+{% endblock %}
+
